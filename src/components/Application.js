@@ -37,11 +37,35 @@ export default function Application(props) {
     return axios  
       .put(`/api/appointments/${id}`, { interview })
       .then((res) => { setState(prev => ({ ...prev, appointments })) })
-      .catch((err) => { console.log(err) });
+      //.catch((err) => { console.log(err) });
+  }
+
+
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview},
+    }
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios
+      .put(`/api/appointments/${id}`, { interview })
+      .then((res) => { setState(prev => ({ ...prev, appointments})) })
   }
 
   //cancel interview
-  
+  function cancelInterview(id) {
+    return axios
+      .delete(`api/appointments${id}`)
+      .then((res) => {
+        setState((prev) => ({ ...prev}));
+      })
+  }
+
 
   
 
@@ -61,6 +85,8 @@ export default function Application(props) {
         interview={interview}
         interviewers={appointmentInterviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
+        editInterview={editInterview}
      />
     );
   });
