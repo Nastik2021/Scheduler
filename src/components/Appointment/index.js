@@ -9,15 +9,36 @@ import Form from "./Form";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 
 
 export default function Appointment(props) {
-  const { id, time, interview, interviewers } = props;
+  const { id, time, interview, interviewers, bookInterview } = props;
 
   const {mode, transition, back } = useVisualMode (props.interview ? SHOW : EMPTY )
 
+  ////
+  const save = (name, interviewer) => {
+    console.log("NAME:", name);
+    // if(!name || !interviewer) {
+    //   return;
+    // }
+    const interview = {
+      student: name,
+      interviewer
+    };
 
+    bookInterview(id, interview);
+
+    transition(SAVING)
+    bookInterview(id, interview)
+      .then(() => {
+        transition(SHOW);
+       })
+  }
+
+  //console.log({interview});
 
   return (
 
@@ -34,10 +55,12 @@ export default function Appointment(props) {
          )}
          {mode === CREATE &&
           <Form
-            interviewers={ [] }
+            interviewers={ interviewers }
             onCancel={() => back()}
+            onSave={ save }
             />
          }
+         {/* { mode === SAVING && (<Status message='Saving' />)} */}
          </article>
          );
          }

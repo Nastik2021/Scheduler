@@ -9,23 +9,24 @@ export default function Form(props) {
 
   
   //useState
-  const [name, setName] = useState(props.name || "");
+  const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const { interviewers, onSave, onCancel} = props
 
   
   // function that sets student(name) and interviewer to "", it is passed to cancel
   const reset = function() {
-    setName('');
+    setStudent('');
     setInterviewer(null);
   };
 
   // function that calls reset() and props.onCancel (when clicking the cancel button)
   const cancel = function() {
-    reset();
     props.onCancel();
+    reset();
   };
 
-
+  console.log({student});
 
   return(
 
@@ -37,8 +38,8 @@ export default function Form(props) {
           name={props.name}  ///to verify
           type="text"
           placeholder="Enter Student Name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
+          value={student}
+          onChange={(event) => setStudent(event.target.value)}
         />
 
     </form>
@@ -51,13 +52,8 @@ export default function Form(props) {
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">
-      <Button danger onClick={cancel}>
-        Cancel
-        </Button>
-
-      <Button confirm onClick={props.onSave}>
-        Save
-        </Button>
+      <Button danger onClick={cancel}>Cancel</Button>
+      <Button confirm onClick={()=> onSave(student, interviewer)}>Save</Button>
     </section>
   </section>
 </main>
