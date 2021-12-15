@@ -26,7 +26,7 @@ export default function Form(props) {
     reset();
   };
 
-  console.log({student});
+  //console.log({student});
 
   return(
 
@@ -35,7 +35,7 @@ export default function Form(props) {
       <form autoComplete="off" onSubmit={event => event.preventDefault()}>
         <input
           className="appointment__create-input text--semi-bold"
-          name={props.name}  ///to verify
+          name="name" ///to verify
           type="text"
           placeholder="Enter Student Name"
           value={student}

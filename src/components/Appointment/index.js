@@ -26,12 +26,13 @@ export default function Appointment(props) {
 
   const {mode, transition, back } = useVisualMode (props.interview ? SHOW : EMPTY )
 
-  ////
-  const save = (name, interviewer) => {
+  
+  const save = (name, interviewer) => {   /////////
     //console.log("NAME:", name);
-    // if(!name || !interviewer) {
-    //   return;
-    // }
+    if(!name || !interviewer) {
+      return;
+    }
+
     const interview = {
       student: name,
       interviewer
@@ -47,12 +48,12 @@ export default function Appointment(props) {
   }
   //console.log({interview});
 
-  const confirmDelete = () => {
+  const confirmDelete = () => {  ///////
     transition(CONFIRM);
   }
   
   
-  const deleteInterview = (id) => {
+  const deleteInterview = (id) => {  //////
     transition(DELETING, true);
           cancelInterview(id)
              .then(() => {
@@ -62,11 +63,29 @@ export default function Appointment(props) {
                transition(ERROR_DELETE, true);
              });
   };
+
+
+  // from compass...to be removed
+  // const deleteInterview = (event) => {
+  //   transition(DELETING, true);
+  //   props
+  //   .cancelInterview(props.id)
+  //   .then(() => transition(EMPTY))
+  //   .catch(err => transition(ERROR_DELETE, true));
+  // }
+
   
+
+
+
+
   
-  const edit = () => {
+  // selecting edit from Show, transition to Confirm ///
+  const edit = () => { 
       transition(EDIT)
   }
+
+
 
 
 
@@ -111,12 +130,12 @@ export default function Appointment(props) {
             onSave={save}
             />
          }
-         {/* { mode === ERROR_DELETE &&
+         { mode === ERROR_DELETE &&
           <Error
             message="Error, cannot delete Appointment, please try again"
             onClose={()=> back()}
             />
-         } */}
+         }
          { mode === ERROR_SAVE &&
           <Error  
             message="Error, cannot save Appointment, please try again"
