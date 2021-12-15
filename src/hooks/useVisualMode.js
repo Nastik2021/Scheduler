@@ -13,37 +13,26 @@ export default function useVisualMode(initial) {
   
   //allows to transition to a new mode
   const transition = (newMode, replace = false) => {
-    
-    if (replace) {
-      setHistory((prev) => [...prev.slice(0, -1), newMode])
-      
-    } else {
-      setHistory((prev) => [...prev, newMode]);
-      
+    if (!replace) {
+      setHistory(prev => [...prev, mode]);
     }
-    setMode(newMode);
+    setMode(newMode)
   };
 
 
+    
   
   // allows to call back to return to previous mode
   const back = () => {
-    setHistory((prev)=> {
-      if (prev.length === 1) {
-        return [...prev];
-      }
-      const lastMode = [...prev.slice(0, -1)];
-      setMode(lastMode[lastMode.length-1])
-      return lastMode
-    })
-  }
-    
-    
-  
- 
+    if (history.length < 1) {
+      return undefined;
+    }
+   const lastMode = history.pop();
+   setHistory(history);
+   setMode(lastMode)
+  } ;
   return { mode, transition, back };
-
-}
+};tment 
 
 
 
