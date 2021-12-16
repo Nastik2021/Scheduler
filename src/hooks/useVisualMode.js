@@ -30,9 +30,9 @@ export default function useVisualMode(initial) {
    const lastMode = history.pop();
    setHistory(history);
    setMode(lastMode)
-  } ;
+  } 
   return { mode, transition, back };
-};tment 
+}
 
 
 
