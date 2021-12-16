@@ -5,9 +5,9 @@
 Interview Scheduler is a Single Page Application for tracking students' interviews built with React. The App utilizes the built-in and custom hooks and allows users to add, edit and delete appointments in real time.
 
 ## Screenshots
-!["Full view upon loading"]()
-!["New interview booking"]()
-!["Interview cancellation"]()
+!["Main page"](https://github.com/Nastik2021/Scheduler/blob/master/docs/main-page.png)
+!["Adding a new appointment"](https://github.com/Nastik2021/Scheduler/blob/master/docs/adding-appt.png)
+!["Deleting an appointment"](https://github.com/Nastik2021/Scheduler/blob/master/docs/deleting-appt.png)
 
 
 
